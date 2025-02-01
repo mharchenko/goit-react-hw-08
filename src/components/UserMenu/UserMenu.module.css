@@ -1,0 +1,30 @@
+.userMenu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 250px;
+}
+
+.span {
+  font-family: 'Times New Roman', Times, serif;
+  font: 1em;
+  color: black;
+
+  padding: 5px 10px;
+  background-color: #f8f9fa;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  cursor: pointer;
+  padding: 5px 10px;
+  background-color: #f8f9fa;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #007bff;
+  color: white;
+}
