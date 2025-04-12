@@ -19,10 +19,19 @@ const contactsSlice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
+      // .addCase(fetchContacts.fulfilled, (state, action) => {
+      //   state.isLoading = false;
+      //   state.items = action.payload;
+      // })
+
       .addCase(fetchContacts.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.items = action.payload;
+        state.items = action.payload.map((contact) => ({
+          ...contact,
+          id: contact._id,
+        }));
       })
+
       .addCase(fetchContacts.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload || 'Failed to load contacts';
@@ -31,9 +40,14 @@ const contactsSlice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
+      // .addCase(addContact.fulfilled, (state, action) => {
+      //   state.isLoading = false;
+      //   state.items.push(action.payload);
+      // })
+
       .addCase(addContact.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.items.push(action.payload);
+        state.items.push({ ...action.payload, id: action.payload._id });
       })
       .addCase(addContact.rejected, (state, action) => {
         state.isLoading = false;
@@ -44,7 +58,7 @@ const contactsSlice = createSlice({
       })
       .addCase(deleteContact.fulfilled, (state, action) => {
         state.items = state.items.filter(
-          (contact) => contact.id !== action.payload
+          (contact) => contact._id !== action.payload
         );
         state.deletingIds = state.deletingIds.filter(
           (id) => id !== action.meta.arg
